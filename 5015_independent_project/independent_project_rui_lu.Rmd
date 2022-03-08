@@ -1,0 +1,113 @@
+---
+title: "Independent Project"
+author: "Rui Lu"
+date: "2020/12/10"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, echo=FALSE}
+library(Hmisc)
+setwd("~/Desktop/Columbia/GR5015/independent_project")
+d = read.csv("nba.csv")
+
+#summary <- summary(d)
+library(stargazer)
+stargazer(d, type = "text")
+```
+
+
+```{r normality test}
+library(stats)
+shapiro.test(d$Salary)
+```
+
+```{r new nor test}
+d$ln.Salary = log(d$Salary)
+shapiro.test(d$ln.Salary)
+```
+
+
+
+
+
+```{r initial model}
+d$ln.Salary = log(d$Salary)
+lm1 <- lm(ln.Salary ~ Age + G + GS +MP+FG+FGpct+threeP+threePpct+twoP+twoPpct+eFGpct+FT +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PTSperG+PG+PF+SG+SF+Exp, data=d)
+summary(lm1)
+```
+
+```{r collinearity}
+library(car)
+vif(lm1)
+```
+
+```{r model 2}
+lm2 <- lm(ln.Salary ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
+summary(lm2)
+```
+
+
+```{r VIF 2}
+
+vif(lm2)
+```
+
+
+```{r bp}
+library(lmtest)
+bptest(lm2)
+```
+
+```{r plot}
+plot(lm2)
+```
+
+
+
+```{r try}
+library(caret)
+salarybc <-BoxCoxTrans(d$ln.Salary)
+print(salarybc)
+```
+
+```{r try 1}
+d <- cbind(d, salary_new=predict(salarybc, d$ln.Salary))
+lm3 <-lm(salary_new ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
+summary(lm3)
+```
+
+```{r 434}
+library(lmtest)
+bptest(lm3)
+```
+
+```{r 23}
+plot(lm3)
+```
+
+```{r 234}
+library(car)
+vif(lm3)
+```
+
+```{r 235}
+lm4 <-lm(salary_new ~ Age + G+GS+threePpct:eFGpct:twoPpct+FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
+summary(lm4)
+```
+
+$[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0.377*ORB+1.301*DRB+2.737*AST+3.781*STL+5.126*BLK+3.689*TOV-1.423*Pfoul-11.080*PG-3.910*PF-3.167*SG+1.147*SF+1.457*Exp-1.042*threePpct*twoPpct*twoPpct$
+
+
+
+
+
+```{r 457}
+library(car)
+vif(lm4)
+```
+
+```{r 09}
+plot(lm4)
+```
