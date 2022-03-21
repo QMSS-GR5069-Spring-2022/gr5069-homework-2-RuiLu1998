@@ -8,8 +8,8 @@ output:
 ---
 
 ```{r setup, echo=FALSE}
-# read the data
 library(Hmisc)
+# read the csv file
 setwd("~/Desktop/Columbia/GR5015/independent_project")
 d = read.csv("nba.csv")
 
