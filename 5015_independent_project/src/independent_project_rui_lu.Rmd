@@ -22,16 +22,18 @@ setwd("~/Desktop/Columbia/GR5015/independent_project")
 d = read.csv("nba.csv")
 
 #summary <- summary(d)
-
+# visualize the results
 stargazer(d, type = "text")
 ```
 
 
 ```{r normality test}
+# conduct the test of normality
 shapiro.test(d$Salary)
 ```
 
 ```{r new nor test}
+# conduct the test of normality
 d$ln.Salary = log(d$Salary)
 shapiro.test(d$ln.Salary)
 ```
@@ -41,32 +43,37 @@ shapiro.test(d$ln.Salary)
 
 
 ```{r initial model}
+# visualize model1 result
 d$ln.Salary = log(d$Salary)
 lm1 <- lm(ln.Salary ~ Age + G + GS +MP+FG+FGpct+threeP+threePpct+twoP+twoPpct+eFGpct+FT +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PTSperG+PG+PF+SG+SF+Exp, data=d)
 summary(lm1)
 ```
 
 ```{r collinearity}
+# check collinearity
 vif(lm1)
 ```
 
 ```{r model 2}
+# visualize model2 result
 lm2 <- lm(ln.Salary ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
 summary(lm2)
 ```
 
 
 ```{r VIF 2}
-
+# check collinearity
 vif(lm2)
 ```
 
 
 ```{r bp}
+# check heteroscedasticity
 bptest(lm2)
 ```
 
 ```{r plot}
+# visualize model2
 plot(lm2)
 ```
 
