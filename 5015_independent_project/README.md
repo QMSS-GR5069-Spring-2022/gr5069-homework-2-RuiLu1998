@@ -1,0 +1,2 @@
+The data analysis project for QMSS GR5015 (Factors that Affect the Salary for NBA Players)
+In this paper, I would like to find out what factors can affect the salary for NBA players. My research will be based on the performance data for all the NBA players during the 2019-2020 season. The dependent variable will be the salary of players, and the independent variables will include the age, experience, position, number of games, performance in shooting, and performance in assistance, etc.
