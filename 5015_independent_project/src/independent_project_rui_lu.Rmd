@@ -40,9 +40,8 @@ shapiro.test(d$ln.Salary)
 
 
 
-
-
 ```{r initial model}
+# :::::: MODEL1 PROCESSING ::::::::
 # visualize model1 result
 d$ln.Salary = log(d$Salary)
 lm1 <- lm(ln.Salary ~ Age + G + GS +MP+FG+FGpct+threeP+threePpct+twoP+twoPpct+eFGpct+FT +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PTSperG+PG+PF+SG+SF+Exp, data=d)
@@ -54,7 +53,9 @@ summary(lm1)
 vif(lm1)
 ```
 
+
 ```{r model 2}
+# :::::: MODEL2 PROCESSING ::::::::
 # visualize model2 result
 lm2 <- lm(ln.Salary ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
 summary(lm2)
@@ -83,6 +84,7 @@ print(salarybc)
 ```
 
 ```{r try 1}
+# :::::: MODEL3 PROCESSING ::::::::
 # visualize model3 result
 d <- cbind(d, salary_new=predict(salarybc, d$ln.Salary))
 lm3 <-lm(salary_new ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
@@ -105,6 +107,7 @@ vif(lm3)
 ```
 
 ```{r 235}
+# :::::: MODEL4 PROCESSING ::::::::
 # visualize model4 result
 lm4 <-lm(salary_new ~ Age + G+GS+threePpct:eFGpct:twoPpct+FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
 summary(lm4)
