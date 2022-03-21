@@ -83,24 +83,29 @@ print(salarybc)
 ```
 
 ```{r try 1}
+# visualize model3 result
 d <- cbind(d, salary_new=predict(salarybc, d$ln.Salary))
 lm3 <-lm(salary_new ~ Age + G + GS+threePpct+twoPpct+eFGpct +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
 summary(lm3)
 ```
 
 ```{r 434}
+# check heteroscedasticity
 bptest(lm3)
 ```
 
 ```{r 23}
+# visualize model3
 plot(lm3)
 ```
 
 ```{r 234}
+# check collinearity
 vif(lm3)
 ```
 
 ```{r 235}
+# visualize model4 result
 lm4 <-lm(salary_new ~ Age + G+GS+threePpct:eFGpct:twoPpct+FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PG+PF+SG+SF+Exp, data=d)
 summary(lm4)
 ```
@@ -109,9 +114,11 @@ $[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0
 
 
 ```{r 457}
+# check collinearity
 vif(lm4)
 ```
 
 ```{r 09}
+# visualize model4
 plot(lm4)
 ```
