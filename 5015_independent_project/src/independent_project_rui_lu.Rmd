@@ -52,6 +52,8 @@ summary(lm1)
 ```{r collinearity}
 # check collinearity
 vif(lm1)
+# :::::: descriptions ::::::
+# The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
 
 
@@ -66,12 +68,16 @@ summary(lm2)
 ```{r VIF 2}
 # check collinearity
 vif(lm2)
+# :::::: descriptions ::::::
+# The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
 
 
 ```{r bp}
 # check heteroscedasticity
 bptest(lm2)
+# :::::: descriptions ::::::
+# The R function bptest() performs the Breusch-Pagan test against heteroskedasticity
 ```
 
 ```{r plot}
@@ -95,6 +101,8 @@ summary(lm3)
 ```{r 434}
 # check heteroscedasticity
 bptest(lm3)
+# :::::: descriptions ::::::
+# The R function bptest() performs the Breusch-Pagan test against heteroskedasticity
 ```
 
 ```{r 23}
@@ -105,6 +113,8 @@ plot(lm3)
 ```{r 234}
 # check collinearity
 vif(lm3)
+# :::::: descriptions ::::::
+# The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
 
 ```{r 235}
@@ -120,6 +130,8 @@ $[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0
 ```{r 457}
 # check collinearity
 vif(lm4)
+# :::::: descriptions ::::::
+# The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
 
 ```{r 09}
