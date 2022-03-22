@@ -45,13 +45,13 @@ shapiro.test(d$ln.Salary)
 
 # visualize model1 result
 d$ln.Salary = log(d$Salary)
-lm1 <- lm(ln.Salary ~ Age + G + GS + MP + FG + FGpct + threeP + threePpct + twoP + twoPpct + eFGpct + FT +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PTSperG+PG+PF+SG+SF+Exp, data = d)
-summary(lm1)
+model1 <- lm(ln.Salary ~ Age + G + GS + MP + FG + FGpct + threeP + threePpct + twoP + twoPpct + eFGpct + FT +FTpct+ORB+DRB+AST+STL+BLK+TOV+Pfoul+PTSperG+PG+PF+SG+SF+Exp, data = d)
+summary(model1)
 ```
 
 ```{r collinearity}
 # check collinearity
-vif(lm1)
+vif(model1)
 # :::::: descriptions ::::::
 # The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
@@ -60,14 +60,14 @@ vif(lm1)
 ```{r model 2}
 # :::::: MODEL2 PROCESSING ::::::::
 # visualize model2 result
-lm2 <- lm(ln.Salary ~ Age + G + GS + threePpct + twoPpct + eFGpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data = d)
-summary(lm2)
+model2 <- lm(ln.Salary ~ Age + G + GS + threePpct + twoPpct + eFGpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data = d)
+summary(model2)
 ```
 
 
 ```{r VIF 2}
 # check collinearity
-vif(lm2)
+vif(model2)
 # :::::: descriptions ::::::
 # The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
@@ -75,14 +75,14 @@ vif(lm2)
 
 ```{r bp}
 # check heteroscedasticity
-bptest(lm2)
+bptest(model2)
 # :::::: descriptions ::::::
 # The R function bptest() performs the Breusch-Pagan test against heteroskedasticity
 ```
 
 ```{r plot}
 # visualize model2
-plot(lm2)
+plot(model2)
 ```
 
 ```{r try}
@@ -94,25 +94,25 @@ print(salarybc)
 # :::::: MODEL3 PROCESSING ::::::::
 # visualize model3 result
 d <- cbind(d, salary_new=predict(salarybc, d$ln.Salary))
-lm3 <-lm(salary_new ~ Age + G + GS + threePpct + twoPpct + eFGpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data=d)
-summary(lm3)
+model3 <-lm(salary_new ~ Age + G + GS + threePpct + twoPpct + eFGpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data=d)
+summary(model3)
 ```
 
 ```{r 434}
 # check heteroscedasticity
-bptest(lm3)
+bptest(model3)
 # :::::: descriptions ::::::
 # The R function bptest() performs the Breusch-Pagan test against heteroskedasticity
 ```
 
 ```{r 23}
 # visualize model3
-plot(lm3)
+plot(model3)
 ```
 
 ```{r 234}
 # check collinearity
-vif(lm3)
+vif(model3)
 # :::::: descriptions ::::::
 # The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
@@ -120,8 +120,8 @@ vif(lm3)
 ```{r 235}
 # :::::: MODEL4 PROCESSING ::::::::
 # visualize model4 result
-lm4 <-lm(salary_new ~ Age + G + GS + threePpct:eFGpct:twoPpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data = d)
-summary(lm4)
+model4 <-lm(salary_new ~ Age + G + GS + threePpct:eFGpct:twoPpct + FTpct + ORB + DRB + AST + STL + BLK + TOV + Pfoul + PG + PF + SG + SF + Exp, data = d)
+summary(model4)
 ```
 
 $[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0.377*ORB+1.301*DRB+2.737*AST+3.781*STL+5.126*BLK+3.689*TOV-1.423*Pfoul-11.080*PG-3.910*PF-3.167*SG+1.147*SF+1.457*Exp-1.042*threePpct*twoPpct*twoPpct$
@@ -129,12 +129,12 @@ $[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0
 
 ```{r 457}
 # check collinearity
-vif(lm4)
+vif(model4)
 # :::::: descriptions ::::::
 # The R function vif () [car package] can be used to detect multicollinearity in a regression model
 ```
 
 ```{r 09}
 # visualize model4
-plot(lm4)
+plot(model4)
 ```
