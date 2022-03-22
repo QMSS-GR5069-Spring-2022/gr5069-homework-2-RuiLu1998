@@ -8,19 +8,26 @@ output:
 ---
 
 ```{r setup, echo=FALSE}
+# :::::: SOME GLOBAL DEFINITIONS ::::::::
+
+# packages to load
 library(Hmisc)
-# read the csv file
+library(stargazer)
+library(stats)
+library(car)
+library(lmtest)
+
+# objects to use in the project
 setwd("~/Desktop/Columbia/GR5015/independent_project")
 d = read.csv("nba.csv")
 
 #summary <- summary(d)
-library(stargazer)
+
 stargazer(d, type = "text")
 ```
 
 
 ```{r normality test}
-library(stats)
 shapiro.test(d$Salary)
 ```
 
@@ -40,7 +47,6 @@ summary(lm1)
 ```
 
 ```{r collinearity}
-library(car)
 vif(lm1)
 ```
 
@@ -57,7 +63,6 @@ vif(lm2)
 
 
 ```{r bp}
-library(lmtest)
 bptest(lm2)
 ```
 
@@ -65,10 +70,7 @@ bptest(lm2)
 plot(lm2)
 ```
 
-
-
 ```{r try}
-library(caret)
 salarybc <-BoxCoxTrans(d$ln.Salary)
 print(salarybc)
 ```
@@ -80,7 +82,6 @@ summary(lm3)
 ```
 
 ```{r 434}
-library(lmtest)
 bptest(lm3)
 ```
 
@@ -89,7 +90,6 @@ plot(lm3)
 ```
 
 ```{r 234}
-library(car)
 vif(lm3)
 ```
 
@@ -101,11 +101,7 @@ summary(lm4)
 $[ln(Salary)^2 - 1]/ 2 = 85.070 + 0.048*Age + 0.136*G + 0.035*GS + 3.174*FTpct+0.377*ORB+1.301*DRB+2.737*AST+3.781*STL+5.126*BLK+3.689*TOV-1.423*Pfoul-11.080*PG-3.910*PF-3.167*SG+1.147*SF+1.457*Exp-1.042*threePpct*twoPpct*twoPpct$
 
 
-
-
-
 ```{r 457}
-library(car)
 vif(lm4)
 ```
 
