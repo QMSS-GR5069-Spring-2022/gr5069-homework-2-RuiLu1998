@@ -9,6 +9,7 @@ output:
 
 ```{r setup, echo=FALSE}
 library(Hmisc)
+# read the csv file
 setwd("~/Desktop/Columbia/GR5015/independent_project")
 d = read.csv("nba.csv")
 
